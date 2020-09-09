@@ -1,0 +1,44 @@
+LAB : Google Cloud Fundamentals: Getting Started with GKE
+
+Objectives : In this lab, you learn how to perform the following tasks:
+               i)  Provision a Kubernetes cluster using Kubernetes Engine.
+               ii) Deploy and manage Docker containers using kubectl.
+
+
+
+Steps:
+1) In the GCP Console, confirm that the APIs "Kubernetes Engine API", and "Container Registry API" are enabled.
+
+2) Open Cloud Shell from the Console.
+
+3)For convenience, place your zone into an environmental variable called MY_ZONE in the Cloud Shell by running:
+ 		"export MY_ZONE=us-central1-a".
+
+4) Start a Kubernetes Engine cluster:
+                "gcloud container clusters create webfrontend --zone $MY_ZONE --num-nodes 2".
+
+5)Run and deploy a container, from your Cloud Shell prompt, launch a single instance of the nginx container:
+ 		"kubectl create deploy nginx --image=nginx:1.17.10".
+
+6)View the pod running the nginx container:
+		"kubectl get pods".
+
+7)Expose the nginx container to the Internet:
+		"kubectl expose deployment nginx --port 80 --type LoadBalancer".
+
+8)View the new service:
+  		"kubectl get services".
+
+9)Test and contact the nginx container remotely using the displayed external IP address.
+
+10)Scale up the number of pods running on your service:
+		"kubectl scale deployment nginx --replicas 3".
+
+11)Confirm that Kubernetes has updated the number of pods:
+		"kubectl get pods".
+
+12)Confirm that your external IP address has not changed:
+		"kubectl get services".
+
+13)Return to the web browser tab and refresh the page to confirm that the nginx web server is still responding.
+		
